@@ -11,21 +11,27 @@ RUN apt update \
     libkrb5-dev \
     libldap2-dev \
     libxml2-dev \
+    libmcrypt-dev \
     unzip \
     wget \
     && apt clean
 RUN docker-php-ext-configure imap --with-kerberos --with-imap-ssl
-RUN docker-php-ext-install gd \
-    gmp \
-    imap \
-    # ioncube-loader \
-    json \
-    ldap \
-    mbstring \
-    pdo \
-    pdo_mysql \
-    # pecl-mailparse \
-    simplexml
+RUN docker-php-ext-install \
+      gd \
+      gmp \
+      imap \
+      json \
+      ldap \
+      mbstring \
+      pdo \
+      pdo_mysql \
+      simplexml \
+    && pecl install \
+      mcrypt-1.0.2 \
+      mailparse \
+    && docker-php-ext-enable \
+      mcrypt \
+      mailparse
 
 RUN cd /tmp \
     && wget https://account.blesta.com/client/plugin/download_manager/client_main/download/133/blesta-${BLESTA_VERSION}.zip \
