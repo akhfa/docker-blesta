@@ -5,6 +5,7 @@ ENV BLESTA_VERSION 4.6.0
 # Blesta
 RUN apt update \
     && apt install -y \
+    cron \
     libgmp-dev \
     libpng-dev \
     libc-client-dev \
@@ -15,6 +16,7 @@ RUN apt update \
     unzip \
     wget \
     && apt clean
+COPY blesta-cron /etc/cron.d/blesta-cron
 RUN docker-php-ext-configure imap --with-kerberos --with-imap-ssl
 RUN docker-php-ext-install \
       gd \
