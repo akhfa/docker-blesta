@@ -17,14 +17,19 @@ pipeline {
                 sh "./build.sh $DOCKERHUB_CREDS_USR $DOCKERHUB_CREDS_PSW akhfa/blesta"
             }
         }
-    }
-    post {
-        success {
+        stage('push') {
             when {
+                beforeInput true
                 branch 'master'
             }
-            sh "chmod +x push.sh"
-            sh "./push.sh $DOCKERHUB_CREDS_USR $DOCKERHUB_CREDS_PSW akhfa/blesta"
+            input {
+                message "Push to registry?"
+                id "push-input"
+            }
+            steps {
+                sh "chmod +x push.sh"
+                sh "./push.sh $DOCKERHUB_CREDS_USR $DOCKERHUB_CREDS_PSW akhfa/blesta"
+            }
         }
     }
 }
