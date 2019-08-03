@@ -37,7 +37,7 @@ RUN docker-php-ext-install \
     && a2enmod rewrite
 
 RUN cd /tmp \
-    && wget https://account.blesta.com/client/plugin/download_manager/client_main/download/133/blesta-${BLESTA_VERSION}.zip \
+    && wget -q https://account.blesta.com/client/plugin/download_manager/client_main/download/133/blesta-${BLESTA_VERSION}.zip \
     && unzip -q blesta-${BLESTA_VERSION}.zip \
     && mv blesta/* /var/www/html/ \
     && mv blesta/.htaccess /var/www/html/ \
