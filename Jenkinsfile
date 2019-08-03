@@ -18,6 +18,9 @@ pipeline {
             }
         }
         stage('push') {
+            environment {
+                DOCKERHUB_CREDS = credentials('dockerhub')
+            }
             when {
                 beforeInput true
                 branch 'master'
