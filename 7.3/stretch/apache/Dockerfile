@@ -42,5 +42,6 @@ RUN cd /tmp \
     && mv blesta/* /var/www/html/ \
     && mv blesta/.htaccess /var/www/html/ \
     && mv uploads /var/www/ \
+    && mkdir /var/www/logs_blesta \
     && rm -rf blesta* hotfix* LICENSE README.md \
     && chown -R www-data:www-data /var/www/html /var/www/uploads
