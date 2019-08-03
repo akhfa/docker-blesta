@@ -31,7 +31,8 @@ RUN docker-php-ext-install \
       mailparse \
     && docker-php-ext-enable \
       mcrypt \
-      mailparse
+      mailparse \
+    && a2enmod rewrite
 
 RUN cd /tmp \
     && wget https://account.blesta.com/client/plugin/download_manager/client_main/download/133/blesta-${BLESTA_VERSION}.zip \
