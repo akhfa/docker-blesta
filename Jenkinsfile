@@ -18,4 +18,13 @@ pipeline {
             }
         }
     }
+    post {
+        success {
+            when {
+                branch 'master'
+            }
+            sh "chmod +x push.sh"
+            sh "./push.sh $DOCKERHUB_CREDS_USR $DOCKERHUB_CREDS_PSW akhfa/blesta"
+        }
+    }
 }
