@@ -13,6 +13,7 @@ RUN apt update \
     libldap2-dev \
     libxml2-dev \
     libmcrypt-dev \
+    supervisor \
     unzip \
     wget \
     && apt clean
@@ -45,3 +46,8 @@ RUN cd /tmp \
     && mkdir /var/www/logs_blesta \
     && rm -rf blesta* hotfix* LICENSE README.md \
     && chown -R www-data:www-data /var/www/html /var/www/uploads /var/www/logs_blesta
+
+COPY supervisord.conf /etc/supervisor/supervisord.conf
+COPY remoteip.conf /etc/apache2/conf-enabled/remoteip.conf
+
+CMD ["/usr/bin/supervisord"]
