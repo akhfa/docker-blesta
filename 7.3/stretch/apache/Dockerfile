@@ -18,6 +18,7 @@ RUN apt update \
     wget \
     && apt clean
 COPY blesta-cron /etc/cron.d/blesta-cron
+RUN chmod 644 /etc/cron.d/blesta-cron
 RUN docker-php-ext-configure imap --with-kerberos --with-imap-ssl
 RUN docker-php-ext-install \
       gd \
